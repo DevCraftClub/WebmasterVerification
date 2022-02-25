@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dleplugin>
+	<name>Webmaster Verification</name>
+	<description>Создаёт мета теги в заголовке сайта для верификации разных сервисов без внедрения</description>
+	<icon>engine/inc/maharder/admin/assets/img/webmaster-verification/icon.png</icon>
+	<version>1.0.0</version>
+	<dleversion>15.1</dleversion>
+	<versioncompare>greater</versioncompare>
+	<upgradeurl></upgradeurl>
+	<filedelete>1</filedelete>
+	<needplugin>MaHarder Assets</needplugin>
+	<mnotice>0</mnotice>
+	<mysqlinstall><![CDATA[]]></mysqlinstall>
+	<mysqlupgrade><![CDATA[INSERT INTO {prefix}_admin_sections (name, title, descr, icon, allow_groups) VALUES ('webmaster-verification', 'Webmaster Verification v1.0.0', 'Создаёт мета теги в заголовке сайта для верификации разных сервисов без внедрения ', '', '1, 2') ON DUPLICATE KEY UPDATE title = 'Webmaster Verification v1.0.0';]]></mysqlupgrade>
+	<mysqlenable><![CDATA[INSERT INTO {prefix}_admin_sections (name, title, descr, icon, allow_groups) VALUES ('webmaster-verification', 'Webmaster Verification v1.0.0', 'Создаёт мета теги в заголовке сайта для верификации разных сервисов без внедрения ', '', '1, 2') ON DUPLICATE KEY UPDATE title = 'Webmaster Verification v1.0.0';]]></mysqlenable>
+	<mysqldisable><![CDATA[DELETE FROM {prefix}_admin_sections WHERE name = 'webmaster-verification';]]></mysqldisable>
+	<mysqldelete><![CDATA[DELETE FROM {prefix}_admin_sections WHERE name = 'webmaster-verification';]]></mysqldelete>
+	<phpinstall><![CDATA[]]></phpinstall>
+	<phpupgrade><![CDATA[]]></phpupgrade>
+	<phpenable><![CDATA[]]></phpenable>
+	<phpdisable><![CDATA[]]></phpdisable>
+	<phpdelete><![CDATA[]]></phpdelete>
+	<notice><![CDATA[]]></notice>
+	<file name="engine/engine.php">
+		<operation action="after">
+			<searchcode><![CDATA[$meta->meta('generator', "DataLife Engine (https://dle-news.ru)");]]></searchcode>
+			<replacecode><![CDATA[
+use MaHarder\classes\Admin;
+require_once DLEPlugins::Check(ENGINE_DIR . '/inc/maharder/_includes/classes/Admin.php');
+$mh_config = new Admin();
+$mv_config = $mh_config->getConfig('webmaster-verification');
+if (count($mv_config) > 0) {
+	foreach ($mv_config as $key) {
+		$meta->meta($key['service'], $key['content']);
+	}
+}]]></replacecode>
+			<enabled>1</enabled>
+		</operation>
+	</file>
+</dleplugin>
