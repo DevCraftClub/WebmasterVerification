@@ -9,7 +9,6 @@ $logs = [
 
 $modVars = [
 	'title' => 'История изменений',
-	'module_icon' => 'fad fa-robot',
 	'logs' => $logs,
 ];
 

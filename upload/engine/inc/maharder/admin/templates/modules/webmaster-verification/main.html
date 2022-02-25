@@ -6,44 +6,83 @@
 		<div class="ui four column grid master">
 
 			{% autoescape 'html' %}
-			{% for s in settings %}
+			{% if settings|length == 0 %}
 				<div class="two column row" data-type="row">
-					<div class="six wide column rowDescr">
-						<label>Сервис</label><br>
-						<small><ul>
-							<li><b>Название сервиса</b> - К примеру: yandex-verification</li>
-							<li><b>Содержимое</b> - Код верификации. К примеру: 1234567890</li>
-						</ul></small>
-					</div>
-					<div class="ten wide column">
-						<div class="ui three column divided grid">
-							<div class="six wide column">
-								<div class="field">
-									<input data-type="service" type="text" name="service[]" placeholder="Название сервиса" value="{{s.service}}" >
-								</div>
-							</div>
-							<div class="six wide column">
-								<div class="field">
-									<input data-type="content" type="text" name="content[]" placeholder="Содержимое сервиса" value="{{s.content}}" >
-								</div>
-							</div>
-							<div class="four wide column">
-								<div class="ui stackable icon buttons">
-									<div data-action="new_service" role="button" class="ui green button" title="Добавить новый сервис">
-										<i class="plus icon"></i>
+						<div class="six wide column rowDescr">
+							<label>Сервис</label><br>
+							<small><ul>
+								<li><b>Название сервиса</b> - К примеру: yandex-verification</li>
+								<li><b>Содержимое</b> - Код верификации. К примеру: 1234567890</li>
+							</ul></small>
+						</div>
+						<div class="ten wide column">
+							<div class="ui three column divided grid">
+								<div class="six wide column">
+									<div class="field">
+										<input data-type="service" type="text" name="service[]" placeholder="Название сервиса" >
 									</div>
-	                                <div data-action="delete_service" role="button" class="ui red button" title="Удалить этот сервис">
-		                                <i class="trash icon"></i>
-	                                </div>
-									<div data-action="copy_service" role="button" class="ui blue button" title="Копировать этот сервис">
-		                                <i class="copy icon"></i>
-	                                </div>
+								</div>
+								<div class="six wide column">
+									<div class="field">
+										<input data-type="content" type="text" name="content[]" placeholder="Содержимое сервиса" >
+									</div>
+								</div>
+								<div class="four wide column">
+									<div class="ui stackable icon buttons">
+										<div data-action="new_service" role="button" class="ui green button" title="Добавить новый сервис">
+											<i class="plus icon"></i>
+										</div>
+		                                <div data-action="delete_service" role="button" class="ui red button" title="Удалить этот сервис">
+			                                <i class="trash icon"></i>
+		                                </div>
+										<div data-action="copy_service" role="button" class="ui blue button" title="Копировать этот сервис">
+			                                <i class="copy icon"></i>
+		                                </div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			{% endfor %}
+			{% else %}
+				{% for s in settings %}
+					<div class="two column row" data-type="row">
+						<div class="six wide column rowDescr">
+							<label>Сервис</label><br>
+							<small><ul>
+								<li><b>Название сервиса</b> - К примеру: yandex-verification</li>
+								<li><b>Содержимое</b> - Код верификации. К примеру: 1234567890</li>
+							</ul></small>
+						</div>
+						<div class="ten wide column">
+							<div class="ui three column divided grid">
+								<div class="six wide column">
+									<div class="field">
+										<input data-type="service" type="text" name="service[]" placeholder="Название сервиса" value="{{s.service}}" >
+									</div>
+								</div>
+								<div class="six wide column">
+									<div class="field">
+										<input data-type="content" type="text" name="content[]" placeholder="Содержимое сервиса" value="{{s.content}}" >
+									</div>
+								</div>
+								<div class="four wide column">
+									<div class="ui stackable icon buttons">
+										<div data-action="new_service" role="button" class="ui green button" title="Добавить новый сервис">
+											<i class="plus icon"></i>
+										</div>
+		                                <div data-action="delete_service" role="button" class="ui red button" title="Удалить этот сервис">
+			                                <i class="trash icon"></i>
+		                                </div>
+										<div data-action="copy_service" role="button" class="ui blue button" title="Копировать этот сервис">
+			                                <i class="copy icon"></i>
+		                                </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			{% endif %}
 
 			{% endautoescape %}
 		</div>
